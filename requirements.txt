@@ -1,3 +1,4 @@
 requests
 discord
 pexels_api
+python-dotenv
