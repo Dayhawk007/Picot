@@ -59,17 +59,19 @@ async def on_message(message):
     if(message.author == client.user):
         return
     if(message.content.split(" ")[0].lower()=="picot"):
-        search_term =" ".join(message.content.split(" ")[1:-1])
-        imgs = ImageScraper(search_term)
         if (message.content.split(" ")[1] == "help"):
             await message.channel.send('`picot "search query" number_of_images(optional, default is 10)`')
             return
         if (message.content.split(" ")[-1].isnumeric() == True):
+            search_term = " ".join(message.content.split(" ")[1:-1])
+            imgs = ImageScraper(search_term)
             imgs.pexels(int(int(message.content.split(" ")[-1])/2.0))
             imgs.unsplash(int(int(message.content.split(" ")[-1])/2.0))
             for photo in imgs.photos:
                 await message.channel.send(photo)
         else:
+            search_term = " ".join(message.content.split(" ")[1:])
+            imgs = ImageScraper(search_term)
             imgs.pexels(5)
             imgs.unsplash(5)
             for photo in imgs.photos:
